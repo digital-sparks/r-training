@@ -11,7 +11,7 @@ Webflow.push(() => {
     direction: 'horizontal',
     spaceBetween: 40,
     grabCursor: true,
-    loop: true,
+    loop: false,
     speed: 550,
     parallax: true,
     keyboard: {
