@@ -1,22 +1,19 @@
 import Swiper from 'swiper';
-import { Parallax, Keyboard, Mousewheel, Autoplay } from 'swiper/modules';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
-gsap.registerPlugin(SplitText, ScrollTrigger);
+import { Navigation, Keyboard, Mousewheel, Autoplay, EffectFade } from 'swiper/modules';
 
 window.Webflow ||= [];
 Webflow.push(() => {
-  const solutionsSwiper = new Swiper('.solution-swiper_wrapper', {
-    modules: [Parallax, Keyboard, Mousewheel, Autoplay],
-    wrapperClass: 'solution-swiper_list',
-    slideClass: 'solution-swiper_item',
+  const testimonialSwiper = new Swiper('.testimonial-swiper_wrapper', {
+    modules: [Navigation, Keyboard, Mousewheel, Autoplay, EffectFade],
+    wrapperClass: 'testimonial-swiper_list',
+    slideClass: 'testimonial-swiper_item',
     slidesPerView: 'auto',
+    effect: 'fade',
     direction: 'horizontal',
-    spaceBetween: 24,
+    spaceBetween: 0,
     grabCursor: true,
     loop: true,
-    speed: 550,
+    speed: 300,
     parallax: true,
     keyboard: {
       enabled: true,
@@ -28,10 +25,14 @@ Webflow.push(() => {
       pauseOnMouseEnter: false,
       disableOnInteraction: true,
     },
+    navigation: {
+      nextEl: '.swiper_button.is-next',
+      prevEl: '.swiper_button.is-prev',
+    },
     breakpoints: {
       768: {
-        speed: 900,
-        spaceBetween: 32,
+        speed: 300,
+        spaceBetween: 0,
         mousewheel: {
           enabled: true,
           forceToAxis: true,
