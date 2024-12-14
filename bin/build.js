@@ -13,6 +13,11 @@ const ENTRY_POINTS = [
   'src/nutrition-consultation.js',
   'src/online-coaching.js',
   'src/personal-training.js',
+  'src/about.js',
+  'src/contact.js',
+  'src/blog.js',
+  'src/blog-category.js',
+  'src/blog-post.js',
 ];
 
 // Config dev serving
