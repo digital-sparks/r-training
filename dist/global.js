@@ -12187,6 +12187,44 @@
       });
       gsapWithCSS.ticker.lagSmoothing(0);
     }
+    document.querySelectorAll("img[data-effect=parallax]").forEach((image) => {
+      gsapWithCSS.set(image, { scale: 1.1 });
+      gsapWithCSS.fromTo(
+        image,
+        {
+          yPercent: -5
+        },
+        {
+          yPercent: 5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: image.parentNode,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            toggleActions: "play none resume reverse"
+          }
+        }
+      );
+    });
+    document.querySelectorAll(".button-gsap").forEach((button) => {
+      $(button).hover(
+        function() {
+          gsapWithCSS.to($(this).find(".button-gsap-text"), {
+            yPercent: -100,
+            duration: 0.5,
+            ease: "power3.out"
+          });
+        },
+        function() {
+          gsapWithCSS.to($(this).find(".button-gsap-text"), {
+            yPercent: 0,
+            duration: 0.5,
+            ease: "power3.out"
+          });
+        }
+      );
+    });
   });
 })();
 /*! Bundled license information:
