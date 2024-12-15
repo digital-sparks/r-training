@@ -16,13 +16,14 @@ Webflow.push(() => {
   if (Webflow.env('editor') === undefined) {
     lenis = new Lenis();
 
-    $('[data-lenis-start]').on('click', function () {
-      lenis.start();
-    });
+    // // useful for when you want to stop the lenis scroll, e.g. when opening a modal
+    // $('[data-lenis-stop]').on('click', function () {
+    //   lenis.stop();
+    // });
 
-    $('[data-lenis-stop]').on('click', function () {
-      lenis.stop();
-    });
+    // $('[data-lenis-start]').on('click', function () {
+    //   lenis.start();
+    // });
 
     lenis.on('scroll', ScrollTrigger.refresh);
 
@@ -42,17 +43,18 @@ Webflow.push(() => {
     gsap.fromTo(
       image,
       {
-        yPercent: -5,
+        yPercent: 0,
       },
       {
-        yPercent: 5,
+        yPercent: 12,
         ease: 'none',
         scrollTrigger: {
           trigger: image.parentNode,
           start: 'top bottom',
           end: 'bottom top',
           scrub: true,
-          toggleActions: 'play none resume reverse',
+          // markers: true,
+          // toggleActions: 'play none resume reverse',
         },
       }
     );
@@ -66,21 +68,60 @@ Webflow.push(() => {
       function () {
         // On hover
         gsap.to($(this).find('.button-gsap-text'), {
-          yPercent: -100,
-          duration: 0.5,
-          ease: 'power3.out',
+          yPercent: -125,
+          scale: 1.05,
+          transformOrigin: 'center top',
+          duration: 0.4,
+          ease: 'power2.out',
         });
       },
       function () {
         // On unhover
         gsap.to($(this).find('.button-gsap-text'), {
           yPercent: 0,
-          duration: 0.5,
-          ease: 'power3.out',
+          scale: 1,
+          duration: 0.6,
+          transformOrigin: 'center top',
+          ease: 'power2.out',
         });
       }
     );
   });
 
   // ————— BUTTON HOVER ANIMATION ————— //
+
+  // ————— LINK HOVER ANIMATION ————— //
+
+  document.querySelectorAll('.link-gsap').forEach((link) => {
+    const text = link.querySelector('.link-gsap_text');
+    const underlineWrap = link.querySelector('.link-gsap_underline-wrap');
+    const underline = link.querySelector('.link-gsap_underline');
+
+    const enterTimeline = gsap.timeline({ paused: true });
+    const leaveTimeline = gsap.timeline({ paused: true });
+
+    enterTimeline
+      .to(underline, { width: '100%', duration: 0.4, ease: 'power2.out' })
+      .to(text, { y: 2, duration: 0.2, ease: 'power2.out' }, '<')
+      .to(underlineWrap, { y: -2, duration: 0.2, ease: 'power2.out' }, '<');
+
+    leaveTimeline
+      .to(underline, { width: '0%', duration: 0.4, ease: 'power2.out' })
+      .to(text, { y: 0, duration: 0.2, ease: 'power2.out' }, '<')
+      .to(underlineWrap, { y: 0, duration: 0.2, ease: 'power2.out' }, '<');
+
+    link.addEventListener('mouseenter', () => {
+      leaveTimeline.pause();
+      enterTimeline.seek(0);
+      enterTimeline.play();
+    });
+
+    link.addEventListener('mouseleave', () => {
+      enterTimeline.pause();
+      leaveTimeline.seek(0);
+      leaveTimeline.play();
+    });
+  });
+
+  // ————— LINK HOVER ANIMATION ————— //
 });
