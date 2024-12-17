@@ -205,6 +205,21 @@ Webflow.push(() => {
   });
   // ————— SERVICES IMAGE PARALLAX EFFECT ————— //
 
+  // ————— MIRROR THE CLICK ————— //
+
+  document.querySelectorAll('[data-click=listen]').forEach((element) => {
+    element.addEventListener('click', function () {
+      // Find the first sibling with the .click class
+      const siblingClick = this.parentNode.querySelector('[data-click=click]');
+
+      if (siblingClick && siblingClick !== this) {
+        siblingClick.click(); // Programmatically trigger the click event
+      }
+    });
+  });
+
+  // ————— MIRROR THE CLICK ————— //
+
   // ––––– SERVICE SWIPER ————— //
   if (document.querySelectorAll('.services-swiper_wrapper')) {
     const servicesSwiper = new Swiper('.services-swiper_wrapper', {
