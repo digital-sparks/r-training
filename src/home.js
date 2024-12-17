@@ -1,8 +1,36 @@
 import Swiper from 'swiper';
 import { Navigation, Keyboard, Mousewheel, Autoplay } from 'swiper/modules';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 window.Webflow ||= [];
 Webflow.push(() => {
+  // ————— SERVICES IMAGE PARALLAX EFFECT ————— //
+  document.querySelectorAll('.image-absolute.is-services').forEach((image) => {
+    // parallax effect on y scroll
+    gsap.fromTo(
+      image,
+      {
+        yPercent: -6,
+      },
+      {
+        yPercent: 6,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: image.parentNode,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+          // markers: true,
+          // toggleActions: 'play none resume reverse',
+        },
+      }
+    );
+  });
+  // ————— SERVICES IMAGE PARALLAX EFFECT ————— //
+
   const servicesSwiper = new Swiper('.services-swiper_wrapper', {
     modules: [Navigation, Keyboard, Mousewheel, Autoplay],
     wrapperClass: 'services-swiper_list',
