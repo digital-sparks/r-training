@@ -57,7 +57,6 @@ Webflow.push(() => {
         // On hover
         gsap.to($(this).find('.button-gsap-text'), {
           yPercent: -125,
-          scale: 1.05,
           transformOrigin: 'center top',
           duration: 0.4,
           ease: 'power2.out',
@@ -67,8 +66,7 @@ Webflow.push(() => {
         // On unhover
         gsap.to($(this).find('.button-gsap-text'), {
           yPercent: 0,
-          scale: 1,
-          duration: 0.6,
+          duration: 0.45,
           transformOrigin: 'center top',
           ease: 'power2.out',
         });
@@ -132,8 +130,8 @@ Webflow.push(() => {
         },
         {
           xPercent: -3,
-          duration: 1.1,
-          delay: 0.2,
+          duration: 1.05,
+          delay: 0.1,
           ease: 'power3.inOut',
         }
       )
